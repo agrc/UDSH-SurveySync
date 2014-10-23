@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Containers", "Containers\Containers.csproj", "{C0D9871E-B3A2-4F52-983C-0C5CDAD42836}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveySync.Soe", "SurveySync.Soe\SurveySync.Soe.csproj", "{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveySync.Soe.Tests", "SurveySync.Soe.Tests\SurveySync.Soe.Tests.csproj", "{6F375CF5-55D5-4BD0-B711-857FBBAF66EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C0D9871E-B3A2-4F52-983C-0C5CDAD42836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0D9871E-B3A2-4F52-983C-0C5CDAD42836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0D9871E-B3A2-4F52-983C-0C5CDAD42836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0D9871E-B3A2-4F52-983C-0C5CDAD42836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2B1FB4E-D100-43DA-917D-A912FF9DFFFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F375CF5-55D5-4BD0-B711-857FBBAF66EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F375CF5-55D5-4BD0-B711-857FBBAF66EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F375CF5-55D5-4BD0-B711-857FBBAF66EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F375CF5-55D5-4BD0-B711-857FBBAF66EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
