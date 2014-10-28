@@ -14,10 +14,6 @@ namespace SurveySync.Soe.Startup {
 
             ApplicationCache.Settings = config.Settings;
             ApplicationCache.FeatureClassIndexMap = CommandExecutor.ExecuteCommand(new CreateLayerMapCommand(soeHelper));
-//            ApplicationCache.Layers.Buildings =
-//                CommandExecutor.ExecuteCommand(new FindLayerByNameCommand("Buildings", soeHelper));
-//            ApplicationCache.Layers.ContributionPropertyPoint =
-//                CommandExecutor.ExecuteCommand(new FindLayerByNameCommand("cpp", soeHelper));
         }
     }
 

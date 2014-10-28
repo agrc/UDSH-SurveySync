@@ -63,8 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CursorTaskTests.cs" />
+    <Compile Include="Commands\DatabaseManipulationTests.cs" />
     <Compile Include="Commands\QueryTests.cs" />
-    <Compile Include="Commands\SqlTests.cs" />
+    <Compile Include="Commands\SqlWhereClauseTests.cs" />
     <Compile Include="Extensions\CollectionAssertionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper.cs" />

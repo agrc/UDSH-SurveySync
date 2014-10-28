@@ -5,7 +5,7 @@ using SurveySync.Soe.Infastructure.Commands;
 
 namespace SurveySync.Soe.Tests.Commands {
 
-    public class SqlTests {
+    public class SqlWhereClauseTests {
         [TestFixture]
         public class ComposeInSetQueryCommandTestsArcMap {
             [Test]

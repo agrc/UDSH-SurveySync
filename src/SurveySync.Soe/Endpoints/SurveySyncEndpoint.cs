@@ -154,7 +154,7 @@ namespace SurveySync.Soe.Endpoints {
             var creates = 0;
             if (actions.Create.Any())
             {
-                creates = CommandExecutor.ExecuteCommand(new CreateNewBuildingRowsCommand(actions.Create));
+                creates = CommandExecutor.ExecuteCommand(new CreateNewBuildingRowsCommand(contributionFeatureClass, buildingsFeatureClass, actions.Create));
             }
 
             var updates = 0;
@@ -162,10 +162,10 @@ namespace SurveySync.Soe.Endpoints {
             {
                 updates = CommandExecutor.ExecuteCommand(new UpdateBuildingsRowsCommand(actions.Update));
             }
+//
+//            var deletes = CommandExecutor.ExecuteCommand(new DeleteProcessedContributionsCommand(contributions));
 
-            var deletes = CommandExecutor.ExecuteCommand(new DeleteProcessedContributionsCommand(contributions));
-
-            return Json(new ResponseContainer<dynamic>(new { creates, updates, deletes }));
+            return Json(new ResponseContainer<dynamic>(new { creates, updates /*, deletes */ }));
         }
     }
 
