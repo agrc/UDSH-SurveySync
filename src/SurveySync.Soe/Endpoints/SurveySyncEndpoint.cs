@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Data;
 using System.Linq;
 using System.Net;
 using Containers;
@@ -12,6 +14,7 @@ using SurveySync.Soe.Commands.Sql;
 using SurveySync.Soe.Extensions;
 using SurveySync.Soe.Infastructure.Commands;
 using SurveySync.Soe.Infastructure.Endpoints;
+using SurveySync.Soe.Models;
 
 namespace SurveySync.Soe.Endpoints {
 
@@ -108,21 +111,61 @@ namespace SurveySync.Soe.Endpoints {
             var buildingsFeatureClass =
                 ApplicationCache.FeatureClassIndexMap.Single(x => x.Name == "Buildings");
 
-            var contributions = CommandExecutor.ExecuteCommand(
+            Collection<Schema> contributions;
+            try
+            {
+                contributions = CommandExecutor.ExecuteCommand(
                     new GetRecordsCommand(contributionFeatureClass, propertyIdWhereClause));
+            }
+            catch (ArgumentException ex)
+            {
+                errors.Message = ex.Message;
+                return Json(errors);
+            }
 
-            var buildings = CommandExecutor.ExecuteCommand(
+            Collection<Schema> buildings;
+            try
+            {
+                buildings = CommandExecutor.ExecuteCommand(
                     new GetRecordsCommand(buildingsFeatureClass, propertyIdWhereClause));
+            }
+            catch (ArgumentException ex)
+            {
+                errors.Message = ex.Message;
+                return Json(errors);
+            }
 
-            var actions = CommandExecutor.ExecuteCommand(new CreateCursorTasksCommand(contributions, buildings));
+            Actions actions;
+            try
+            {
+                actions = CommandExecutor.ExecuteCommand(new CreateCursorTasksCommand(contributions, buildings));
+            }
+            catch (ConstraintException ex)
+            {
+                errors.Message = ex.Message;
+                return Json(errors);
+            }
 
-            // TODO insert cursor
+            if (actions == null)
+            {
+                return Json(new ResponseContainer(HttpStatusCode.OK, "response container"));
+            }
 
-            // TODO update cursor
+            var creates = 0;
+            if (actions.Create.Any())
+            {
+                creates = CommandExecutor.ExecuteCommand(new CreateNewBuildingRowsCommand(actions.Create));
+            }
 
-            // TODO delete cursor
+            var updates = 0;
+            if (actions.Update.Any())
+            {
+                updates = CommandExecutor.ExecuteCommand(new UpdateBuildingsRowsCommand(actions.Update));
+            }
 
-            return Json(new ResponseContainer(HttpStatusCode.OK, ""));
+            var deletes = CommandExecutor.ExecuteCommand(new DeleteProcessedContributionsCommand(contributions));
+
+            return Json(new ResponseContainer<dynamic>(new { creates, updates, deletes }));
         }
     }
 
