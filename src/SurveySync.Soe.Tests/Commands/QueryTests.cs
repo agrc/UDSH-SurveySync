@@ -33,22 +33,7 @@ namespace SurveySync.Soe.Tests.Commands {
                     {
                         FieldMap = new Dictionary<string, IndexFieldMap>
                             {
-                                {"PROP_NAME", new IndexFieldMap(0, "PROP_NAME")},
-                                {"HOUSE_NO", new IndexFieldMap(0, "HOUSE_NO")},
-                                {"DIRECTION", new IndexFieldMap(0, "DIRECTION")},
-                                {"STREET_NAM", new IndexFieldMap(0, "STREET_NAM")},
-                                {"CITY", new IndexFieldMap(0, "CITY")},
-                                {"CNTY_CITY", new IndexFieldMap(0, "CNTY_CITY")},
-                                {"EST_ADDRES", new IndexFieldMap(0, "EST_ADDRES")},
-                                {"EVALUATION", new IndexFieldMap(0, "EVALUATION")},
-                                {"ORIGINAL_U", new IndexFieldMap(0, "ORIGINAL_U")},
-                                {"HEIGHT", new IndexFieldMap(0, "HEIGHT")},
-                                {"TYPE", new IndexFieldMap(0, "TYPE")},
-                                {"OUT_NONCON", new IndexFieldMap(0, "OUT_NONCON")},
-                                {"OUT_CONTRI", new IndexFieldMap(0, "OUT_CONTRI")},
-                                {"POINT_X", new IndexFieldMap(0, "POINT_X")},
-                                {"POINT_Y", new IndexFieldMap(0, "POINT_Y")},
-                                {"COMMENTS", new IndexFieldMap(0, "COMMENTS")},
+                                {"PROPERTYID", new IndexFieldMap(0, "PROPERTYID")},
                             }
                     };
 

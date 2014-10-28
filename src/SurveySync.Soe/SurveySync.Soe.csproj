@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="Attributes\EndpointAttribute.cs" />
     <Compile Include="Cache\ApplicationCache.cs" />
+    <Compile Include="Commands\CreateCursorTasksCommand.cs" />
     <Compile Include="Commands\CreateRestImplementationCommand.cs" />
     <Compile Include="Commands\GetValueAtIndexCommand.cs" />
     <Compile Include="Commands\CreateLayerMapCommand.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Extensions\PropertySetExensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\ThrowHelper.cs" />
+    <Compile Include="Models\Actions.cs" />
     <Compile Include="Models\Configuration\ApplicationFields.cs" />
     <Compile Include="Models\Configuration\ApplicationLayers.cs" />
     <Compile Include="Models\Configuration\ApplicationSettings.cs" />

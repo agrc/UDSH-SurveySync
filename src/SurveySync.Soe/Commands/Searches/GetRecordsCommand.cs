@@ -7,7 +7,8 @@ using SurveySync.Soe.Models;
 
 namespace SurveySync.Soe.Commands.Searches {
 
-    public class GetRecordsCommand : Command<Collection<Schema>> {
+    public class GetRecordsCommand : Command<Collection<Schema>>
+    {
         private readonly IFeatureClass _table;
         private readonly string _whereClause;
         private readonly Dictionary<string, IndexFieldMap> _indexFieldMaps;
@@ -31,17 +32,17 @@ namespace SurveySync.Soe.Commands.Searches {
 
             var cursor = _table.Search(queryFilter, true);
 
-            var contributions = new Collection<Schema>();
+            var ids = new Collection<Schema>();
 
             IFeature feature;
             while ((feature = cursor.NextFeature()) != null)
             {
-                contributions.Add(Schema.Map(feature, _indexFieldMaps));
+                ids.Add(Schema.Map(feature, _indexFieldMaps));
             }
 
             Marshal.ReleaseComObject(cursor);
 
-            Result = contributions;
+            Result = ids;
         }
 
         /// <summary>

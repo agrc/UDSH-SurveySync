@@ -6,6 +6,7 @@ using Containers;
 using ESRI.ArcGIS.SOESupport;
 using SurveySync.Soe.Attributes;
 using SurveySync.Soe.Cache;
+using SurveySync.Soe.Commands;
 using SurveySync.Soe.Commands.Searches;
 using SurveySync.Soe.Commands.Sql;
 using SurveySync.Soe.Extensions;
@@ -107,17 +108,19 @@ namespace SurveySync.Soe.Endpoints {
             var buildingsFeatureClass =
                 ApplicationCache.FeatureClassIndexMap.Single(x => x.Name == "Buildings");
 
-            var contributions =
-                CommandExecutor.ExecuteCommand(
+            var contributions = CommandExecutor.ExecuteCommand(
                     new GetRecordsCommand(contributionFeatureClass, propertyIdWhereClause));
 
-            var buildings =
-                CommandExecutor.ExecuteCommand(
+            var buildings = CommandExecutor.ExecuteCommand(
                     new GetRecordsCommand(buildingsFeatureClass, propertyIdWhereClause));
 
-            //var actions = CommandExecutor.ExecuteCommand(new DecideWhatToDoCommand(contributions, buildings));
+            var actions = CommandExecutor.ExecuteCommand(new CreateCursorTasksCommand(contributions, buildings));
 
-            //TODO perform actions
+            // TODO insert cursor
+
+            // TODO update cursor
+
+            // TODO delete cursor
 
             return Json(new ResponseContainer(HttpStatusCode.OK, ""));
         }
