@@ -160,7 +160,7 @@ namespace SurveySync.Soe.Endpoints {
             var updates = 0;
             if (actions.Update.Any())
             {
-                updates = CommandExecutor.ExecuteCommand(new UpdateBuildingsRowsCommand(actions.Update));
+                updates = CommandExecutor.ExecuteCommand(new UpdateBuildingRowsCommand(actions.Update));
             }
 //
 //            var deletes = CommandExecutor.ExecuteCommand(new DeleteProcessedContributionsCommand(contributions));

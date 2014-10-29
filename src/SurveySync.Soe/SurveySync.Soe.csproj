@@ -110,6 +110,7 @@
     <Compile Include="Commands\Sql\ComposeMultiConditionQueryCommand.cs" />
     <Compile Include="Commands\Searches\GetPropertyIdsFromSurveyCommand.cs" />
     <Compile Include="Commands\Searches\QueryCommand.cs" />
+    <Compile Include="Commands\UpdateBuildingRowsCommand.cs" />
     <Compile Include="Commands\UpdateLayerMapWithFieldIndexMapCommand.cs" />
     <Compile Include="Configuration\DebugConfiguration.cs" />
     <Compile Include="Endpoints\VersionEndpoint.cs" />
@@ -185,7 +186,7 @@
   <Import Project="$(MSBuildExtensionsPath)\ESRI\ESRI.ArcGIS.AddIns.Server.targets" Condition="Exists('$(MSBuildExtensionsPath)\ESRI\ESRI.ArcGIS.AddIns.Server.targets')" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_IncrementBeforeBuild="True" />
+      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
