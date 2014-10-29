@@ -37,7 +37,7 @@ namespace SurveySync.Soe.Infastructure.Commands {
                                   "Done Executing");
 #endif
             } catch (Exception ex) {
-                Debug.Print("Error processing task: {0}".With(commandName), ex);
+                Debug.Print("Error processing task: {0} {1}", commandName, ex);
                 throw ex;
 #if !DEBUG
 Logger.LogMessage(ServerLogger.msgType.error, "{0}.{1}".With(commandName, "execute"), MessageCode,

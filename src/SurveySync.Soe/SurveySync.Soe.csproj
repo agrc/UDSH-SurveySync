@@ -63,14 +63,12 @@
     <Reference Include="ESRI.ArcGIS.Carto, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="ESRI.ArcGIS.Display, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="ESRI.ArcGIS.Geodatabase, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Geometry, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Server, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -99,17 +97,14 @@
     <Compile Include="Commands\CreateCursorTasksCommand.cs" />
     <Compile Include="Commands\CreateNewBuildingRowsCommand.cs" />
     <Compile Include="Commands\CreateRestImplementationCommand.cs" />
-    <Compile Include="Commands\GetValueAtIndexCommand.cs" />
     <Compile Include="Commands\CreateLayerMapCommand.cs" />
     <Compile Include="Commands\FindAllEndpointsCommand.cs" />
     <Compile Include="Commands\FindIndexByFieldNameCommand.cs" />
-    <Compile Include="Commands\FindLayerByNameCommand.cs" />
     <Compile Include="Commands\Searches\BuildLayerPropertiesCommand.cs" />
     <Compile Include="Commands\Searches\GetRecordsCommand.cs" />
     <Compile Include="Commands\Sql\ComposeInSetQueryCommand.cs" />
     <Compile Include="Commands\Sql\ComposeMultiConditionQueryCommand.cs" />
     <Compile Include="Commands\Searches\GetPropertyIdsFromSurveyCommand.cs" />
-    <Compile Include="Commands\Searches\QueryCommand.cs" />
     <Compile Include="Commands\UpdateBuildingRowsCommand.cs" />
     <Compile Include="Commands\UpdateLayerMapWithFieldIndexMapCommand.cs" />
     <Compile Include="Configuration\DebugConfiguration.cs" />
@@ -122,7 +117,6 @@
     <Compile Include="Extensions\ThrowHelper.cs" />
     <Compile Include="Models\Actions.cs" />
     <Compile Include="Models\Configuration\ApplicationFields.cs" />
-    <Compile Include="Models\Configuration\ApplicationLayers.cs" />
     <Compile Include="Models\Configuration\ApplicationSettings.cs" />
     <Compile Include="Infastructure\Commands\Command.cs" />
     <Compile Include="Infastructure\Commands\CommandExecutor.cs" />
@@ -133,9 +127,7 @@
     <Compile Include="Models\FeatureClassIndexMap.cs" />
     <Compile Include="Models\IndexFieldMap.cs" />
     <Compile Include="Models\Schema.cs" />
-    <Compile Include="Models\Search\QueryArgs.cs" />
     <Compile Include="Models\Search\SearchLayerProperties.cs" />
-    <Compile Include="Models\Search\SearchResult.cs" />
     <Compile Include="SoeBase.cs" />
     <Compile Include="Endpoints\SurveySyncEndpoint.cs" />
     <Compile Include="Startup\CacheConfig.cs" />
@@ -186,7 +178,7 @@
   <Import Project="$(MSBuildExtensionsPath)\ESRI\ESRI.ArcGIS.AddIns.Server.targets" Condition="Exists('$(MSBuildExtensionsPath)\ESRI\ESRI.ArcGIS.AddIns.Server.targets')" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_IncrementBeforeBuild="True" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" />
+      <UserProperties BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.MonthAndDayStamp" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_IncrementBeforeBuild="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

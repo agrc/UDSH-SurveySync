@@ -13,7 +13,7 @@ namespace SurveySync.Soe.Models {
             var nullNumbers =
                 new Func<object, int?>(value => value == DBNull.Value ? (int?) null : Convert.ToInt32(value));
 
-            var propertyId = nullNumbers(feature.Value[attributeToIndexMap["PROPERTYID"].Index]);
+            int? propertyId = nullNumbers(feature.Value[attributeToIndexMap["PROPERTYID"].Index]);
             if (!propertyId.HasValue)
             {
                 throw new ArgumentException(string.Format("{0}.{1} is missing a property id value.", feature.Table,

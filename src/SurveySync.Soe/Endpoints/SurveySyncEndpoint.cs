@@ -160,7 +160,20 @@ namespace SurveySync.Soe.Endpoints {
             var updates = 0;
             if (actions.Update.Any())
             {
-                updates = CommandExecutor.ExecuteCommand(new UpdateBuildingRowsCommand(actions.Update));
+                try
+                {
+                    updates = CommandExecutor.ExecuteCommand(new UpdateBuildingRowsCommand(contributionFeatureClass, buildingsFeatureClass, actions.Update));
+                }
+                catch (ArgumentNullException ex)
+                {
+                    errors.Message = ex.Message;
+                    return Json(errors);
+                }
+                catch(DataMisalignedException ex)
+                {
+                    errors.Message = ex.Message;
+                    return Json(errors);
+                }
             }
 //
 //            var deletes = CommandExecutor.ExecuteCommand(new DeleteProcessedContributionsCommand(contributions));

@@ -15,7 +15,7 @@ namespace SurveySync.Soe.Commands {
         private readonly IFeatureClass _destinationTable;
         private readonly string _whereClause;
         private readonly Dictionary<string, IndexFieldMap> _destinationFieldMap;
-        private Dictionary<string, IndexFieldMap> _sourceFieldMap;
+        private readonly Dictionary<string, IndexFieldMap> _sourceFieldMap;
 
         public UpdateBuildingRowsCommand(FeatureClassIndexMap source, FeatureClassIndexMap destination,
                                             IEnumerable<Schema> contributions)
@@ -33,9 +33,6 @@ namespace SurveySync.Soe.Commands {
         /// </summary>
         protected override void Execute()
         {
-            //http://help.arcgis.com/en/sdk/10.0/arcobjects_net/conceptualhelp/index.html#//00010000049v000000
-            const bool useBuffering = false;
-
             // TODO create query filter for each class
             var queryFilter = new QueryFilter
             {
@@ -59,52 +56,33 @@ namespace SurveySync.Soe.Commands {
             var sourcePkLocation =
                 _sourceFieldMap[ApplicationCache.Settings.ContributionPropertyPointFields.PropertyId].Index;
 
-            // ascending order
-            // source || destination | source || destination
-            // 0      ||    1        |  1     ||    0
-            // 1      ||    2        |  3     ||    1
-            // 2      ||    5        |  5     ||    2
+            // fail if update sets are not identical
             var count = 0;
             IFeature sourceFeature;
             var destinationFeature = destinationCursor.NextFeature();
             while ((sourceFeature = sourceCursor.NextFeature()) != null)
             {
+                if (destinationFeature == null)
+                {
+                    Result = count;
+
+                    Marshal.ReleaseComObject(sourceCursor);
+                    Marshal.ReleaseComObject(destinationCursor);
+                    
+                    throw new DataMisalignedException(string.Format("Update sets are not identical. Investigate {0}", _whereClause));
+                }
+
                 var sourcePropertyId = Convert.ToInt32(sourceFeature.Value[sourcePkLocation]);
                 var destPropertyId = Convert.ToInt32(destinationFeature.Value[destinationPkLocation]);
 
-                // source is less than destination. need to increment source
-                while(sourcePropertyId < destPropertyId)
-                {
-                    sourceFeature = sourceCursor.NextFeature();
-
-                    if (sourceFeature == null)
-                    {
-                        destinationCursor.Flush();
-
-                        Marshal.ReleaseComObject(sourceCursor);
-                        Marshal.ReleaseComObject(destinationCursor);
-
-                        return;
-                    }
-
-                    sourcePropertyId = Convert.ToInt32(sourceFeature.Value[sourcePkLocation]);
-                }
-
                 if (sourcePropertyId != destPropertyId)
                 {
-                    destinationFeature = destinationCursor.NextFeature();
-
-                    if (destinationFeature == null)
-                    {
-                        destinationCursor.Flush();
-
-                        Marshal.ReleaseComObject(sourceCursor);
-                        Marshal.ReleaseComObject(destinationCursor);
-
-                        return;
-                    }
-
-                    continue;
+                    Result = count;
+                    
+                    Marshal.ReleaseComObject(sourceCursor);
+                    Marshal.ReleaseComObject(destinationCursor);
+                    
+                    throw new DataMisalignedException(string.Format("Update sets are not identical. Investigate {0}", _whereClause));
                 }
 
                 UpdateFeature(sourceFeature, destinationFeature);
@@ -112,9 +90,8 @@ namespace SurveySync.Soe.Commands {
                 destinationCursor.UpdateFeature(destinationFeature);
 
                 count++;
+                destinationFeature = destinationCursor.NextFeature();
             }
-
-            destinationCursor.Flush();
 
             Marshal.ReleaseComObject(sourceCursor);
             Marshal.ReleaseComObject(destinationCursor);
@@ -153,7 +130,7 @@ namespace SurveySync.Soe.Commands {
         /// </returns>
         public override string ToString()
         {
-            return "UpdateBuildingRowsCommand";
+            return string.Format("UpdateBuildingRowsCommand, where {0}", _whereClause);
         }
     }
 
