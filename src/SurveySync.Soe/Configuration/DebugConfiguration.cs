@@ -31,29 +31,28 @@ namespace SurveySync.Soe.Configuration {
     ///     Debug configration. Preconfigured for debug environment
     /// </summary>
     public class DebugConfiguration : IConfigurable {
-        public ApplicationSettings GetSettings(IPropertySet set)
+        public ApplicationSettings GetSettings(IPropertySet props)
         {
             var settings = new ApplicationSettings
+            {
+                FeatureServiceEditingUrl = props.GetValueAsString("FeatureServiceUrl", true),
+                SurveyToPropertyIdLookupTable = props.GetValueAsString("PropertySurveyRecordTableName", true),
+                SurveyToPropertyIdFields = new ApplicationFields
                 {
-                    SurveyToPropertyIdLookupTable = "PROPERTYSURVEYRECORD",
-                    FeatureServiceEditingUrl = "http://localhost/arcgis/rest/services/UDSH/soe/FeatureServer/applyEdits",
-                    SurveyToPropertyIdFields = new ApplicationFields
-                        {
-                            PropertyId = "PropertyRecordID",
-                            SurveyId = "SurveyRecordID",
-                            ReturnFields = new[] {"PropertyRecordID"}
-                        },
-                    ContributionPropertyPointFields = new ApplicationFields
-                        {
-                            PropertyId = "PropertyId"
-                        },
-                    BuildingFields = new ApplicationFields
-                        {
-                            PropertyId = "PropertyId"
-                        },
-                    ConnectionString =
-                        @"Data Source=localhost\sqlexpress;Initial Catalog=UDSHHistoricBuildings;Trusted_Connection=Yes;"
-                };
+                    PropertyId = props.GetValueAsString("Survey.PropertyId", true),
+                    SurveyId = props.GetValueAsString("Survey.SurveyId", true),
+                    ReturnFields = props.GetValueAsString("Survey.ReturnFields", true).Split(new[] { ',' }),
+                },
+                ContributionPropertyPointFields = new ApplicationFields
+                {
+                    PropertyId = props.GetValueAsString("ContributionPropertyPoint.PropertyId", true),
+                },
+                BuildingFields = new ApplicationFields
+                {
+                    PropertyId = props.GetValueAsString("Buildings.PropertyId", true),
+                },
+                ConnectionString = props.GetValueAsString("ConnectionString", true).Replace("::", ";").Replace("--", "=").Replace("\\\\", "\\"),
+            };
 
             return settings;
         }
@@ -64,13 +63,13 @@ namespace SurveySync.Soe.Configuration {
         {
             var settings = new ApplicationSettings
                 {
-                    FeatureServiceEditingUrl = props.GetValueAsString("featureServiceUrl", true),
-                    SurveyToPropertyIdLookupTable = props.GetValueAsString("propertySurveyRecordTableName", true),
+                    FeatureServiceEditingUrl = props.GetValueAsString("FeatureServiceUrl", true),
+                    SurveyToPropertyIdLookupTable = props.GetValueAsString("PropertySurveyRecordTableName", true),
                     SurveyToPropertyIdFields = new ApplicationFields
                         {
                             PropertyId = props.GetValueAsString("Survey.PropertyId", true),
                             SurveyId = props.GetValueAsString("Survey.SurveyId", true),
-                            ReturnFields = props.GetValueAsString("Survey.ReturnFields", true).Split(new[]{','}),
+                            ReturnFields = props.GetValueAsString("Survey.ReturnFields", true).Split(new[] { ',' }),
                         },
                     ContributionPropertyPointFields = new ApplicationFields
                         {
@@ -80,7 +79,7 @@ namespace SurveySync.Soe.Configuration {
                         {
                             PropertyId = props.GetValueAsString("Buildings.PropertyId", true),
                         },
-                    ConnectionString = props.GetValueAsString("connectionString", true).Replace("::", ";"),
+                    ConnectionString = props.GetValueAsString("ConnectionString", true).Replace("::", ";").Replace("--", "=").Replace("\\\\", "\\"),
                 };
 
             return settings;

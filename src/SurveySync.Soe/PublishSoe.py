@@ -1,7 +1,7 @@
 import requests
 
 host = 'localhost'
-configuration = 'Debug'
+configuration = 'Release'
 service_name = 'UDSH/soe'
 
 token_url = 'http://{}:6080/arcgis/admin/generateToken'.format(host)
