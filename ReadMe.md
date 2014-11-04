@@ -8,6 +8,16 @@ _Load the [postman collection](http://www.getpostman.com/) from `\SurveySync\Sur
 
 #### Request
 **POST** an integer value `surveyId` to `.../arcgis/rest/services/UDSH/SurveySync/MapServer/exts/SurveySyncSoe/Create` and `f=json` to recieve the response as json.
+```json
+{
+  "surveyId": 12345,
+  "f": "json"
+}
+```
+or 
+```
+.../arcgis/rest/services/UDSH/SurveySync/MapServer/exts/SurveySyncSoe/Create?surveyId=12345&f=json
+```
 
 #### Response
 
@@ -68,7 +78,7 @@ Error
 **Requires**  
  
  - ArcGIS Server >= 10.1
- - Publish `SurveySync.Soe.soe` in `\SurveySync\src\SurveySync.Soe\bin\Release` to ArcGIS Site Extensions.
+ - Upload `SurveySync.Soe.soe` in `\SurveySync\src\SurveySync.Soe\bin\Release` to ArcGIS Site Extensions.
  - Publish the `.mxd` in `\SurveySync\maps`
     - **Development** `soe.localhost.mxd`
     - **Staging** `soe.itdb110.mxd`
@@ -92,6 +102,7 @@ Error
                     - `=` replaced with `--`
                     - `\` replaced with `\\`
                     - `;` replaced with `::`
+                    - example?
 
 ## Tests
 **Requires**  
