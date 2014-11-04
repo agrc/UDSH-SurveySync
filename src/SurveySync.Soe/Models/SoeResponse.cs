@@ -28,13 +28,7 @@ namespace SurveySync.Soe.Models {
         public int Deleted { get; private set; }
         [JsonProperty(PropertyName = "created")]
         public int Created { get; private set; }
-        [JsonProperty(PropertyName = "message")]
         public string Message { get; private set; }
-
-        public bool ShouldSerializeMessage()
-        {
-            return !string.IsNullOrEmpty(Message);
-        }
     }
 
 }

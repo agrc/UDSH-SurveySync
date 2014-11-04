@@ -27,6 +27,11 @@ namespace SurveySync.Soe.Endpoints {
     [Endpoint]
     public class SurveySyncEndpoint : JsonEndpoint, IRestEndpoint {
         /// <summary>
+        /// Makes the endpoint answer only over http POST requests
+        /// </summary>
+        private const bool PostOnly = true;
+
+        /// <summary>
         ///     The resource name that displays for Supported Operations
         /// </summary>
         private const string ResourceName = "Create";
@@ -48,7 +53,8 @@ namespace SurveySync.Soe.Endpoints {
                                          {
                                              "json"
                                          },
-                                     Handler);
+                                     Handler,
+                                     PostOnly);
         }
 
         #endregion
@@ -109,9 +115,9 @@ namespace SurveySync.Soe.Endpoints {
             }
 
             var contributionFeatureClass =
-                ApplicationCache.FeatureClassIndexMap.Single(x => x.Name == "cpp");
+                ApplicationCache.FeatureClassIndexMap.Single(x => x.Name == ApplicationCache.Settings.ContributionPropertyPointLayerName);
             var buildingsFeatureClass =
-                ApplicationCache.FeatureClassIndexMap.Single(x => x.Name == "Buildings");
+                ApplicationCache.FeatureClassIndexMap.Single(x => x.Name == ApplicationCache.Settings.BuildingLayerName);
 
             Collection<FeatureAction> contributions;
             try
@@ -162,7 +168,10 @@ namespace SurveySync.Soe.Endpoints {
 
             var response = new SoeResponse(result);
 
-            return Json(new ResponseContainer<SoeResponse>(response));
+            var code = response.Successful ? HttpStatusCode.OK : HttpStatusCode.InternalServerError;
+            var message = response.Message;
+
+            return Json(new ResponseContainer<SoeResponse>(response, code, message));
         }
     }
 

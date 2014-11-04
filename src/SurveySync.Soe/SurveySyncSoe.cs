@@ -24,12 +24,14 @@ namespace SurveySync.Soe {
          //Properties that can be set on the capabilities tab in manager.
          Properties = @"ConnectionString=Data Source--localhost\\sqlexpress::Initial Catalog--UDSHHistoricBuildings::Trusted_Connection--Yes::;
 PropertySurveyRecordTableName=PROPERTYSURVEYRECORD;
-FeatureServiceUrl=http://localhost/arcgis/rest/services/UDSH/soe/FeatureServer/applyEdits;
+FeatureServiceUrl=http://localhost/arcgis/rest/services/UDSH/SurveySync/FeatureServer/applyEdits;
 ContributionPropertyPoint.PropertyId=PropertyId;
+ContributionPropertyPoint.LayerName=cpp;
 Survey.SurveyId=SurveyRecordID;
 Survey.PropertyId=PropertyRecordID;
 Survey.ReturnFields=PropertyRecordID;
-Buildings.PropertyId=PropertyId;",
+Buildings.PropertyId=PropertyId;
+Buildings.LayerName=Buildings;",
          SupportsREST = true,
          SupportsSOAP = false)]
     public class SurveySyncSoe : SoeBase, IServerObjectExtension, IObjectConstruct, IRESTRequestHandler {

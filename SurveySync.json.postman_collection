@@ -1,0 +1,109 @@
+{
+	"id": "1cc73b33-9b59-9c3a-734a-6099291e014d",
+	"name": "SurveySync",
+	"description": "",
+	"order": [
+		"c142cb48-342a-a298-d223-81987d2f9bf1",
+		"084d894f-f23f-6927-ec52-666382671693",
+		"256f22b6-ab66-4553-793d-ee71d19e8159"
+	],
+	"folders": [],
+	"timestamp": 1415129961100,
+	"synced": false,
+	"requests": [
+		{
+			"id": "084d894f-f23f-6927-ec52-666382671693",
+			"headers": "",
+			"url": "http://localhost/arcgis/rest/services/UDSH/SurveySync/MapServer/exts/SurveySyncSoe/Create",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "surveyId",
+					"value": "0",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "f",
+					"value": "json",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1415131064307,
+			"name": "Nothing to update or create",
+			"description": "",
+			"collectionId": "1cc73b33-9b59-9c3a-734a-6099291e014d",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "256f22b6-ab66-4553-793d-ee71d19e8159",
+			"headers": "",
+			"url": "http://localhost/arcgis/rest/services/UDSH/SurveySync/MapServer/exts/SurveySyncSoe/Create",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "surveyId",
+					"value": "126",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "f",
+					"value": "json",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"time": 1415132132510,
+			"name": "Successful",
+			"description": "",
+			"collectionId": "1cc73b33-9b59-9c3a-734a-6099291e014d",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "c142cb48-342a-a298-d223-81987d2f9bf1",
+			"headers": "",
+			"url": "http://localhost/arcgis/rest/services/UDSH/SurveySync/MapServer/exts/SurveySyncSoe/Create",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [
+				{
+					"key": "surveyId",
+					"value": "-1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "f",
+					"value": "json",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "No properties found for survey",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1415130698766,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "1cc73b33-9b59-9c3a-734a-6099291e014d",
+			"synced": false
+		}
+	]
+}

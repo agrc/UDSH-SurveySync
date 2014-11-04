@@ -47,10 +47,12 @@ namespace SurveySync.Soe.Configuration {
                 {
                     PropertyId = props.GetValueAsString("ContributionPropertyPoint.PropertyId", true),
                 },
+                ContributionPropertyPointLayerName = props.GetValueAsString("ContributionPropertyPoint.LayerName", true),
                 BuildingFields = new ApplicationFields
                 {
                     PropertyId = props.GetValueAsString("Buildings.PropertyId", true),
                 },
+                BuildingLayerName = props.GetValueAsString("Buildings.LayerName", true),
                 ConnectionString = props.GetValueAsString("ConnectionString", true).Replace("::", ";").Replace("--", "=").Replace("\\\\", "\\"),
             };
 
@@ -75,10 +77,12 @@ namespace SurveySync.Soe.Configuration {
                         {
                             PropertyId = props.GetValueAsString("ContributionPropertyPoint.PropertyId", true),
                         },
+                    ContributionPropertyPointLayerName = props.GetValueAsString("ContributionPropertyPoint.LayerName", true),
                     BuildingFields = new ApplicationFields
                         {
                             PropertyId = props.GetValueAsString("Buildings.PropertyId", true),
                         },
+                    BuildingLayerName = props.GetValueAsString("Buildings.LayerName", true),
                     ConnectionString = props.GetValueAsString("ConnectionString", true).Replace("::", ";").Replace("--", "=").Replace("\\\\", "\\"),
                 };
 
