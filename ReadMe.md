@@ -68,7 +68,7 @@ Error
 **Requires**  
  
  - ArcGIS Server >= 10.1
- - Publish `SurveySync.Soe.soe` in `\SurveySync\src\SurveySync.Soe\bin\Release` to ArcGIS Site Extensions.
+ - Upload `SurveySync.Soe.soe` in `\SurveySync\src\SurveySync.Soe\bin\Release` to ArcGIS Site Extensions.
  - Publish the `.mxd` in `\SurveySync\maps`
     - **Development** `soe.localhost.mxd`
     - **Staging** `soe.itdb110.mxd`
@@ -92,6 +92,7 @@ Error
                     - `=` replaced with `--`
                     - `\` replaced with `\\`
                     - `;` replaced with `::`
+                    - eg: `Data Source=localhost\sqlexpress;Initial Catalog=UDSHHistoricBuildings;Trusted_Connection=Yes;` **>>** `Data Source--localhost\\sqlexpress::Initial Catalog--UDSHHistoricBuildings::Trusted_Connection--Yes::`
 
 ## Tests
 **Requires**  
