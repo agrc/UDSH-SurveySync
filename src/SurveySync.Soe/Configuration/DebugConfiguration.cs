@@ -1,5 +1,4 @@
 ﻿using ESRI.ArcGIS.esriSystem;
-using SurveySync.Soe.Extensions;
 using SurveySync.Soe.Infastructure;
 using SurveySync.Soe.Models.Configuration;
 
@@ -27,6 +26,7 @@ namespace SurveySync.Soe.Configuration {
 
     #endregion
 
+    //
     /// <summary>
     ///     Debug configration. Preconfigured for debug environment
     /// </summary>
@@ -35,56 +35,26 @@ namespace SurveySync.Soe.Configuration {
         {
             var settings = new ApplicationSettings
             {
-                FeatureServiceEditingUrl = props.GetValueAsString("FeatureServiceUrl", true),
-                SurveyToPropertyIdLookupTable = props.GetValueAsString("PropertySurveyRecordTableName", true),
+                FeatureServiceEditingUrl = "http://localhost:8888/arcgis/rest/services/UDSH/SurveySync/FeatureServer/applyEdits",
+                SurveyToPropertyIdLookupTable = "PROPERTYSURVEYRECORD",
                 SurveyToPropertyIdFields = new ApplicationFields
                 {
-                    PropertyId = props.GetValueAsString("Survey.PropertyId", true),
-                    SurveyId = props.GetValueAsString("Survey.SurveyId", true),
-                    ReturnFields = props.GetValueAsString("Survey.ReturnFields", true).Split(new[] { ',' }),
+                    PropertyId = "PropertyRecordID",
+                    SurveyId = "SurveyRecordID",
+                    ReturnFields = "PropertyRecordID".Split(new[] { ',' }),
                 },
                 ContributionPropertyPointFields = new ApplicationFields
                 {
-                    PropertyId = props.GetValueAsString("ContributionPropertyPoint.PropertyId", true),
+                    PropertyId = "PropertyId",
                 },
-                ContributionPropertyPointLayerName = props.GetValueAsString("ContributionPropertyPoint.LayerName", true),
+                ContributionPropertyPointLayerName = "cpp",
                 BuildingFields = new ApplicationFields
                 {
-                    PropertyId = props.GetValueAsString("Buildings.PropertyId", true),
+                    PropertyId = "PropertyId",
                 },
-                BuildingLayerName = props.GetValueAsString("Buildings.LayerName", true),
-                ConnectionString = props.GetValueAsString("ConnectionString", true).Replace("::", ";").Replace("--", "=").Replace("\\\\", "\\"),
+                BuildingLayerName = "Buildings",
+                ConnectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=UDSHHistoricBuildings;Trusted_Connection=YES;",
             };
-
-            return settings;
-        }
-    }
-
-    public class RestEndPointConfiguration : IConfigurable {
-        public ApplicationSettings GetSettings(IPropertySet props)
-        {
-            var settings = new ApplicationSettings
-                {
-                    FeatureServiceEditingUrl = props.GetValueAsString("FeatureServiceUrl", true),
-                    SurveyToPropertyIdLookupTable = props.GetValueAsString("PropertySurveyRecordTableName", true),
-                    SurveyToPropertyIdFields = new ApplicationFields
-                        {
-                            PropertyId = props.GetValueAsString("Survey.PropertyId", true),
-                            SurveyId = props.GetValueAsString("Survey.SurveyId", true),
-                            ReturnFields = props.GetValueAsString("Survey.ReturnFields", true).Split(new[] { ',' }),
-                        },
-                    ContributionPropertyPointFields = new ApplicationFields
-                        {
-                            PropertyId = props.GetValueAsString("ContributionPropertyPoint.PropertyId", true),
-                        },
-                    ContributionPropertyPointLayerName = props.GetValueAsString("ContributionPropertyPoint.LayerName", true),
-                    BuildingFields = new ApplicationFields
-                        {
-                            PropertyId = props.GetValueAsString("Buildings.PropertyId", true),
-                        },
-                    BuildingLayerName = props.GetValueAsString("Buildings.LayerName", true),
-                    ConnectionString = props.GetValueAsString("ConnectionString", true).Replace("::", ";").Replace("--", "=").Replace("\\\\", "\\"),
-                };
 
             return settings;
         }

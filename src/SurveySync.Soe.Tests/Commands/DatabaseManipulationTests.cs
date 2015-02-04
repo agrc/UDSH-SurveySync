@@ -81,7 +81,7 @@ namespace SurveySync.Soe.Tests.Commands {
             private IFeatureWorkspace _featureWorkspace;
             private IWorkspace _workspace;
             private QueryFilter _queryFilter;
-            private const string Url = "http://localhost/arcgis/rest/services/UDSH/soe/FeatureServer/applyEdits";
+            private const string Url = "http://localhost/arcgis/rest/services/UDSH/SurveySync/FeatureServer/applyEdits";
             private const int BuildingWritesIndex = 3;
 
             [Test]
@@ -205,7 +205,7 @@ namespace SurveySync.Soe.Tests.Commands {
             private IFeatureWorkspace _featureWorkspace;
             private IWorkspace _workspace;
             private QueryFilter _queryFilter;
-            private const string Url = "http://localhost/arcgis/rest/services/UDSH/soe/FeatureServer/applyEdits";
+            private const string Url = "http://localhost/arcgis/rest/services/UDSH/SurveySync/FeatureServer/applyEdits";
             private const int BuildingUpdatesIndex = 2;
             private List<int> _objectIds;
 

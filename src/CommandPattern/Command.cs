@@ -29,7 +29,7 @@ namespace CommandPattern {
                 Debug.Print("Executing\r\n{0}", commandName);
 #if !DEBUG
 
-                Logger.LogMessage(ServerLogger.msgType.debug, string.Format("{0}.{1}", commandName, "execute"),
+                Logger.LogMessage(ServerLogger.msgType.infoSimple, string.Format("{0}.{1}", commandName, "execute"),
                                   MessageCode,
                                   string.Format("Executing\r\n{0}", commandName));
 #endif
@@ -38,7 +38,7 @@ namespace CommandPattern {
                 Debug.Print("Done Executing\r\n{0}", commandName);
 #if !DEBUG
 
-                Logger.LogMessage(ServerLogger.msgType.debug, string.Format("{0}.{1}", commandName, "execute"),
+                Logger.LogMessage(ServerLogger.msgType.infoSimple, string.Format("{0}.{1}", commandName, "execute"),
                                   MessageCode,
                                   "Done Executing");
 #endif

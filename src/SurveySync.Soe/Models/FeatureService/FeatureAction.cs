@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using Newtonsoft.Json;
@@ -35,7 +36,7 @@ namespace SurveySync.Soe.Models.FeatureService {
         [JsonProperty(PropertyName = "attributes")]
         public Dictionary<string, object> Attributes { get; set; }
 
-        public static FeatureAction Create(IFeature feature)
+        public static FeatureAction Create(IFeature feature, IList<string> ignores = null)
         {
             var attributes = new Dictionary<string, object>();
             var fields = feature.Fields;
@@ -44,7 +45,7 @@ namespace SurveySync.Soe.Models.FeatureService {
             {
                 var field = fields.Field[i];
 
-                if (!field.Editable && field.Name != "OBJECTID")
+                if (!field.Editable && field.Name != "OBJECTID") 
                 {
                     continue;
                 }

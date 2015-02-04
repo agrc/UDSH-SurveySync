@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using CommandPattern;
 using ESRI.ArcGIS.Geodatabase;
@@ -9,11 +10,13 @@ namespace SurveySync.Soe.Commands.Searches {
     public class GetRecordsCommand : Command<Collection<FeatureAction>> {
         private readonly IFeatureClass _table;
         private readonly string _whereClause;
+        private readonly IList<string> _ignores;
 
-        public GetRecordsCommand(IFeatureClass table, string whereClause)
+        public GetRecordsCommand(IFeatureClass table, string whereClause, IList<string> ignores =null)
         {
             _table = table;
             _whereClause = whereClause;
+            _ignores = ignores;
         }
 
         /// <summary>
@@ -33,7 +36,7 @@ namespace SurveySync.Soe.Commands.Searches {
             IFeature feature;
             while ((feature = cursor.NextFeature()) != null)
             {
-                ids.Add(FeatureAction.Create(feature));
+                ids.Add(FeatureAction.Create(feature, _ignores));
             }
 
             Marshal.ReleaseComObject(cursor);

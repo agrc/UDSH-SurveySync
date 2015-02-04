@@ -22,33 +22,30 @@ namespace SurveySync.Soe {
          //shows up in manager under capabilities
          DisplayName = "UDSH Survey Sync",
          //Properties that can be set on the capabilities tab in manager.
-         Properties = @"ConnectionString=Data Source--localhost\\sqlexpress::Initial Catalog--UDSHHistoricBuildings::Trusted_Connection--Yes::;
-PropertySurveyRecordTableName=PROPERTYSURVEYRECORD;
-FeatureServiceUrl=http://localhost/arcgis/rest/services/UDSH/SurveySync/FeatureServer/applyEdits;
-ContributionPropertyPoint.PropertyId=PropertyId;
-ContributionPropertyPoint.LayerName=cpp;
-Survey.SurveyId=SurveyRecordID;
-Survey.PropertyId=PropertyRecordID;
-Survey.ReturnFields=PropertyRecordID;
-Buildings.PropertyId=PropertyId;
-Buildings.LayerName=Buildings;",
+         //must be camelCased!
+         Properties = "connectionString=;propertySurveyRecordTableName=;featureServiceUrl=;contributionPropertyPoint.PropertyId=;contributionPropertyPoint.LayerName=;survey.SurveyId=;survey.PropertyId=;survey.ReturnFields=;buildings.PropertyId=;buildings.LayerName=;",
          SupportsREST = true,
          SupportsSOAP = false)]
     public class SurveySyncSoe : SoeBase, IServerObjectExtension, IObjectConstruct, IRESTRequestHandler {
+        public ServerLogger Logger = new ServerLogger();      
         /// <summary>
         ///     Initializes a new instance of the <see cref="SurveySyncSoe" /> class. If you have business logic
         ///     that you want to run when the SOE first becomes enabled, don’t here; instead, use the following
         ///     IObjectConstruct.Construct() method found in SoeBase.cs
         /// </summary>
         public SurveySyncSoe() {
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "SurveySyncSoe", 2472, "SurveySyc - Starting up");
             ReqHandler = CommandExecutor.ExecuteCommand(
                 new CreateRestImplementationCommand(typeof (FindAllEndpointsCommand).Assembly));
             Kernel = new Container();
 #if DEBUG
             Kernel.Register<IConfigurable>(x => new DebugConfiguration());
+#elif STAGE 
+            Kernel.Register<IConfigurable>(x => new StageConfiguration());
 #else
             Kernel.Register<IConfigurable>(x => new RestEndPointConfiguration());
 #endif
+
         }
 
         private Container Kernel { get; set; }
@@ -60,9 +57,10 @@ Buildings.LayerName=Buildings;",
         /// </summary>
         /// <param name="props"> The props. </param>
         public override void Construct(IPropertySet props) {
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "Construct", 2472, "SurveySyc - Constructing");
             base.Construct(props);
-
             CacheConfig.Cache(ServerObjectHelper, props, Kernel);
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "Construct", 2472, "SurveySyc - Constructing Done");
         }
         #endregion
     }

@@ -145,5 +145,42 @@ namespace SurveySync.Soe.Tests.Commands {
                 Is.EqualTo(contributions.Single(x => Convert.ToInt32(x.Attributes["OBJECTID"]) == 2).Attributes["UpdateMe"]));
         }
     }
+    
+    [TestFixture]
+    public class ApplyEditActionForCopyTests {
+        [Test]
+        public void ActionIsNullIfContributionsAreEmpty()
+        {
+            var buildings = new List<FeatureAction>
+                {
+                    new FeatureAction(new Dictionary<string, object>
+                        {
+                            {"PropertyId", 3}
+                        }),
+                    new FeatureAction(new Dictionary<string, object>
+                        {
+                            {"PropertyId", 4}
+                        }),
+                    new FeatureAction(new Dictionary<string, object>
+                        {
+                            {"PropertyId", 5}
+                        }),
+                };
+
+            var command = new CreateApplyEditActionsForCopyCommand(0, buildings);
+            var actual = CommandExecutor.ExecuteCommand(command);
+
+            Assert.That(actual.Total, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void ActionIsNullIfListsAreEmpty()
+        {
+            var command = new CreateApplyEditActionsForCopyCommand(0, new List<FeatureAction>());
+            var actual = CommandExecutor.ExecuteCommand(command);
+
+            Assert.That(actual, Is.Null);
+        }
+    }
 
 }

@@ -11,7 +11,7 @@ using ESRI.ArcGIS.SOESupport;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("AGRC")]
 [assembly: AssemblyProduct("SurveySync.Soe")]
-[assembly: AssemblyCopyright("Copyright ©2014")]
+[assembly: AssemblyCopyright("Copyright ©2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -22,8 +22,8 @@ using ESRI.ArcGIS.SOESupport;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
 [assembly: Guid("86FBA63B-F042-4E1A-8DF5-1AB3C714ABC5")]
-[assembly: AssemblyVersion("0.0.204.1104")]
-[assembly: AssemblyFileVersion("0.0.204.1104")]
+[assembly: AssemblyVersion("0.1.3.0219")]
+[assembly: AssemblyFileVersion("0.1.3.0219")]
 [assembly: AddInPackage("SurveySync.Soe", "86324B4E-D493-40B9-898F-25898596F070",
     Author = "mapserv",
     Company = "AGRC",

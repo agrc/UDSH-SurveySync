@@ -20,7 +20,7 @@ namespace SurveySync.Soe.Tests.Models {
         [Test]
         public void CanParseConnectionString()
         {
-            _propertySet.Setup(x => x.GetProperty("ConnectionString")).Returns(
+            _propertySet.Setup(x => x.GetProperty("connectionString")).Returns(
                 "Data Source--localhost\\\\sqlexpress::Initial Catalog--UDSHHistoricBuildings::Trusted_Connection--Yes::");
 
             var propertySet = _propertySet.Object;
@@ -33,7 +33,7 @@ namespace SurveySync.Soe.Tests.Models {
         [Test]
         public void CanParseMultipleReturnFields()
         {
-            _propertySet.Setup(x => x.GetProperty("Survey.ReturnFields")).Returns("A,B");
+            _propertySet.Setup(x => x.GetProperty("survey.ReturnFields")).Returns("A,B");
 
             var propertySet = _propertySet.Object;
 
@@ -46,7 +46,7 @@ namespace SurveySync.Soe.Tests.Models {
         [Test]
         public void CanParseSongleReturnFields()
         {
-            _propertySet.Setup(x => x.GetProperty("Survey.ReturnFields")).Returns("A");
+            _propertySet.Setup(x => x.GetProperty("survey.ReturnFields")).Returns("A");
 
             var propertySet = _propertySet.Object;
 
