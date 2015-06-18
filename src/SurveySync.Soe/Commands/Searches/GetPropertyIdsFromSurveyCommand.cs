@@ -2,6 +2,8 @@
 using System.Linq;
 using CommandPattern;
 using Dapper;
+using ESRI.ArcGIS.SOESupport;
+using SurveySync.Soe.Extensions;
 using SurveySync.Soe.Models.Configuration;
 
 namespace SurveySync.Soe.Commands.Searches {
@@ -24,7 +26,7 @@ namespace SurveySync.Soe.Commands.Searches {
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0}, Settings: {1}, Id: {2}", "GetPropertyIdsFromSurveyCommand", _settings, _id);
+            return "";// string.Format("{0}, Settings: {1}, Id: {2}", "GetPropertyIdsFromSurveyCommand", _settings, _id);
         }
 
         //      select PropertyRecordID from PROPERTYSURVEYRECORD where SurveyRecordID = 126
@@ -33,10 +35,16 @@ namespace SurveySync.Soe.Commands.Searches {
         /// </summary>
         public override void Execute()
         {
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "GetPropertyIdsFromSurveyCommand.Execute", 2472, "Inside GetPropertyIdsFromSurveyCommand");
+#endif
             var fields = _settings.SurveyToPropertyIdFields;
 
             var query = string.Format("select {0} from {1} where {2} = {3}", string.Join(",", fields.ReturnFields),
                                       _settings.SurveyToPropertyIdLookupTable, fields.SurveyId, _id);
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "GetPropertyIdsFromSurveyCommand.Execute", 2472, "where clause {0}".With(query));
+#endif
 
             using (var connection = new SqlConnection(_settings.ConnectionString))
             {

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using CommandPattern;
 using Containers;
+using ESRI.ArcGIS.SOESupport;
 using Newtonsoft.Json;
+using SurveySync.Soe.Extensions;
 using SurveySync.Soe.Models.FeatureService;
 
 namespace SurveySync.Soe.Commands.Http {
@@ -21,7 +23,7 @@ namespace SurveySync.Soe.Commands.Http {
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0}, Url: {1}", "SendEditsToFeatureServiceCommand", _url);
+            return "SendEditsToFeatureServiceCommand";
         }
 
         public SendEditsToFeatureServiceCommand(EditContainer container, string url)
@@ -37,7 +39,32 @@ namespace SurveySync.Soe.Commands.Http {
         {
            using (var client = new HttpClient())
            {
-               var response = client.PostAsync(_url, new FormUrlEncodedContent(_data));
+#if !DEBUG
+               Logger.LogMessage(ServerLogger.msgType.infoSimple, "SendEditsToFeatureServiceCommand", 2472, "_url: {0}".With(_url));
+#endif
+               HttpContent formContent = null;
+               try
+               {
+                   formContent = new FormUrlEncodedContent(_data);
+               }
+               catch (FormatException fex)
+               {
+#if !DEBUG
+                   Logger.LogMessage(ServerLogger.msgType.infoSimple, "SendEditsToFeatureServiceCommand", 2472, "POST format exception (exception swallowed)");
+#endif
+
+                   var tempContent = new MultipartFormDataContent();
+                   foreach (var keyValuePair in _data)
+                   {
+                       tempContent.Add(new StringContent(keyValuePair.Value), keyValuePair.Key);
+                   }
+                   formContent = tempContent;
+               }
+#if !DEBUG
+               Logger.LogMessage(ServerLogger.msgType.infoSimple, "SendEditsToFeatureServiceCommand", 2472, "form encoded");
+#endif
+
+               var response = client.PostAsync(_url, formContent);
 
                var content = response.Result.Content.ReadAsStringAsync().Result;
 

@@ -64,6 +64,10 @@ namespace SurveySync.Soe.Commands {
 #endif
             var layerInfos = mapServer.GetServerInfo(_defaultMapName).MapLayerInfos;
 
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoStandard, "CreateLayerMapCommand.Execute", MessageCode,
+                              "layerInfos count: {0}".With(layerInfos.Count));
+#endif
             var count = layerInfos.Count;
 
             for (var i = 0; i < count; i++)
@@ -81,6 +85,10 @@ namespace SurveySync.Soe.Commands {
                 result.Add(new FeatureClassIndexMap(i, layerInfo.Name, GetFeatureClassFromMap(i)));
             }
 
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoStandard, "CreateLayerMapCommand.Execute", MessageCode,
+                              "result count: {0}".With(result.Count));
+#endif
             CommandExecutor.ExecuteCommand(new UpdateLayerMapWithFieldIndexMapCommand(result));
 
             Result = result;

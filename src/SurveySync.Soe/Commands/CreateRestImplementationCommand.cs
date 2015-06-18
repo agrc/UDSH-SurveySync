@@ -3,6 +3,7 @@ using System.Reflection;
 using CommandPattern;
 using ESRI.ArcGIS.SOESupport;
 using SurveySync.Soe.Endpoints;
+using SurveySync.Soe.Extensions;
 using SurveySync.Soe.Infastructure.Endpoints;
 
 namespace SurveySync.Soe.Commands {
@@ -47,8 +48,15 @@ namespace SurveySync.Soe.Commands {
 
                 if (restOperation == null)
                 {
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "CreateRestImplementationCommand.Execute", 2472, "Rest operation is null");
+#endif
                     continue;
                 }
+
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "CreateRestImplementationCommand.Execute", 2472, "Adding rest operation {0}".With(restOperation.name));
+#endif
 
                 resource.operations.Add(restOperation);
             }

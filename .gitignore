@@ -1,2 +1,3 @@
 *.secret
 src/SurveySync.Soe/Configuration/StageConfiguration.cs
+secrets.cfg

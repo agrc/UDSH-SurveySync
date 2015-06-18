@@ -120,7 +120,7 @@
     <Compile Include="Configuration\DebugConfiguration.cs" />
     <Compile Include="Configuration\RestEndPointConfiguration.cs" />
     <Compile Include="Configuration\StageConfiguration.cs" />
-    <Compile Include="Endpoints\SurveyCopyndpoint.cs" />
+    <Compile Include="Endpoints\SurveyCopyEndpoint.cs" />
     <Compile Include="Endpoints\VersionEndpoint.cs" />
     <Compile Include="Extensions\AssemblyExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
@@ -196,7 +196,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Stage|AnyCPU'">
     <OutputPath>bin\Stage\</OutputPath>
     <DefineConstants>STAGE;TRACE</DefineConstants>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>

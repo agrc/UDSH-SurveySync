@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using CommandPattern;
 using ESRI.ArcGIS.Geodatabase;
+using ESRI.ArcGIS.SOESupport;
 using SurveySync.Soe.Models.FeatureService;
 
 namespace SurveySync.Soe.Commands.Searches {
@@ -24,12 +25,19 @@ namespace SurveySync.Soe.Commands.Searches {
         /// </summary>
         public override void Execute()
         {
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "GetRecordsCommand", 2472, "Getting records");
+#endif
             var queryFilter = new QueryFilter
                 {
                     WhereClause = _whereClause
                 };
 
             var cursor = _table.Search(queryFilter, true);
+
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "GetRecordsCommand", 2472, "table searched");
+#endif
 
             var ids = new Collection<FeatureAction>();
 
@@ -38,6 +46,10 @@ namespace SurveySync.Soe.Commands.Searches {
             {
                 ids.Add(FeatureAction.Create(feature, _ignores));
             }
+
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "GetRecordsCommand", 2472, "looped over features");
+#endif
 
             Marshal.ReleaseComObject(cursor);
 
@@ -52,7 +64,7 @@ namespace SurveySync.Soe.Commands.Searches {
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0}, WhereClause: {1}", "GetRecordsCommand", _whereClause);
+            return "GetRecordsCommand";
         }
     }
 
