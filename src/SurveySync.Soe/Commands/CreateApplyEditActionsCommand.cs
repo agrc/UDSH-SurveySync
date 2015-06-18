@@ -2,6 +2,8 @@
 using System.Data;
 using System.Linq;
 using CommandPattern;
+using ESRI.ArcGIS.SOESupport;
+using SurveySync.Soe.Extensions;
 using SurveySync.Soe.Models.FeatureService;
 
 namespace SurveySync.Soe.Commands {
@@ -22,12 +24,19 @@ namespace SurveySync.Soe.Commands {
         }
 
         /// <summary>
-        ///     code to execute when command is run.
+        /// code to execute when command is run.
         /// </summary>
+        /// <exception cref="System.Data.ConstraintException">Total number of actions created does not equal the number of actions required to  +
+        ///                     complete this request. Corrupt data issue.</exception>
         public override void Execute()
         {
             var editActions = new ApplyEditActions {Id = _buildingLayerIndex};
             var deleteActions = new ApplyEditActions {Id = _contribLayerIndex};
+
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "CreateApplyEditActionsCommand", 2472, "edit action total {0}".With(editActions.Total));
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "CreateApplyEditActionsCommand", 2472, "delete action total {0}".With(deleteActions.Total));
+#endif
 
             var buildings = _buildings.Select(x => x.Attributes["PropertyId"]).ToList();
             var contribs = _contributions.Select(x => x.Attributes["PropertyId"]).ToList();
@@ -36,6 +45,10 @@ namespace SurveySync.Soe.Commands {
             var difference = contribs.Except(buildings);
 
             var recordsToUpdate = _buildings.Where(x => intersection.Contains(x.Attributes["PropertyId"])).ToList();
+
+#if !DEBUG
+            Logger.LogMessage(ServerLogger.msgType.infoSimple, "CreateApplyEditActionsCommand", 2472, "records to update".With(recordsToUpdate.Count));
+#endif
 
             editActions.Adds = _contributions.Where(x => difference.Contains(x.Attributes["PropertyId"])).ToList();
             editActions.Updates =
@@ -67,8 +80,7 @@ namespace SurveySync.Soe.Commands {
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0}, Contributions: {1}, Buildings: {2}", "CreateCursorTasksCommand", _contributions,
-                                 _buildings);
+            return "CreateApplyEditActionsCommand";
         }
     }
 
