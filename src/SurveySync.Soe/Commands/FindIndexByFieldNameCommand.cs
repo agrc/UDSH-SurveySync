@@ -27,7 +27,7 @@ namespace SurveySync.Soe.Commands {
 
         public override string ToString()
         {
-            return string.Format("{0}", "FindIndexByFieldNameCommand");
+            return "FindIndexByFieldNameCommand";
         }
 
         /// <summary>

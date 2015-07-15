@@ -59,7 +59,7 @@ namespace SurveySync.Soe.Commands {
         /// </returns>
         public override string ToString()
         {
-            return string.Format("UpdateBuildingAttributesCommand");
+            return "UpdateBuildingAttributesCommand";
         }
     }
 

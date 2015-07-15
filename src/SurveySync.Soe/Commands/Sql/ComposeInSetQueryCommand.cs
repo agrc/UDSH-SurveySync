@@ -75,7 +75,7 @@ namespace SurveySync.Soe.Commands.Sql {
         /// </returns>
         public override string ToString()
         {
-            return string.Format("ComposeInSetQueryCommand");
+            return "ComposeInSetQueryCommand";
         }
     }
 

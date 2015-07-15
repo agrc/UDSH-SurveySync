@@ -15,7 +15,7 @@ namespace SurveySync.Soe.Commands.Sql {
 
         public ComposeMultiConditionQueryCommand(string fieldname, string terms, bool includeAll)
         {
-            _terms = terms.Split(new[] {','});
+            _terms = terms.Split(',');
             _includeAll = includeAll;
             _sitename = fieldname;
         }
@@ -48,8 +48,7 @@ namespace SurveySync.Soe.Commands.Sql {
 
         public override string ToString()
         {
-            return string.Format("{0}, IncludeAll: {1}, Sitename: {2}, Terms: {3}", "BuildSiteSearchQueryCommand",
-                                 _includeAll, _sitename, _terms);
+            return "ComposeMultiConditionQueryCommand";
         }
     }
 

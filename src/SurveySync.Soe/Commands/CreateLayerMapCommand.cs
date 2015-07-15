@@ -112,7 +112,7 @@ namespace SurveySync.Soe.Commands {
 
         public override string ToString()
         {
-            return string.Format("{0}, DefaultMapName: {1}", "CreateLayerMapCommand", _defaultMapName);
+            return "CreateLayerMapCommand";
         }
     }
 

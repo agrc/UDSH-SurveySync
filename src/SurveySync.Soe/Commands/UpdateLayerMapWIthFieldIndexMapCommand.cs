@@ -33,7 +33,7 @@ namespace SurveySync.Soe.Commands {
 
         public override string ToString()
         {
-            return string.Format("{0}, Map count: {1}", "UpdateLayerMapWIthFieldIndexMapCommand", _map.Count);
+            return "UpdateLayerMapWIthFieldIndexMapCommand";
         }
     }
 
