@@ -10,7 +10,7 @@ namespace SurveySync.Soe.Tests {
         {
             RuntimeManager.Bind(ProductCode.Server);
 
-            var init = new AoInitializeClass();
+            var init = new AoInitialize();
             init.Initialize(esriLicenseProductCode.esriLicenseProductCodeArcServer);
 
             var factoryType = Type.GetTypeFromProgID("esriDataSourcesGDB.SdeWorkspaceFactory");
