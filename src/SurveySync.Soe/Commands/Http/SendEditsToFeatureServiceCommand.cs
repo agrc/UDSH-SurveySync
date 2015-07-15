@@ -47,7 +47,7 @@ namespace SurveySync.Soe.Commands.Http {
                {
                    formContent = new FormUrlEncodedContent(_data);
                }
-               catch (FormatException fex)
+               catch (FormatException)
                {
 #if !DEBUG
                    Logger.LogMessage(ServerLogger.msgType.infoSimple, "SendEditsToFeatureServiceCommand", 2472, "POST format exception (exception swallowed)");
