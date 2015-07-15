@@ -24,11 +24,11 @@ using ESRI.ArcGIS.SOESupport;
 [assembly: Guid("86FBA63B-F042-4E1A-8DF5-1AB3C714ABC5")]
 [assembly: AssemblyVersion("1.0.25.0618")]
 [assembly: AssemblyFileVersion("1.0.25.0618")]
-[assembly: AddInPackage("SurveySync.Soe", "86324B4E-D493-40B9-898F-25898596F070",
-    Author = "mapserv",
+[assembly: AddInPackage("SurveySync.Soe", "60359fbf-b3f6-45a1-aecf-fdd8552fc9ca",
+    Author = "agrc-arcgis",
     Company = "AGRC",
     Date = "4/15/2014 1:51:49 PM",
     Description = "UDSH HistoricSurvey sync with ContributionContainer",
     TargetProduct = "Server",
-    TargetVersion = "10.2",
+    TargetVersion = "10.3",
     Version = "1.0")]
