@@ -28,7 +28,7 @@ upload_url = 'http://{}:6080/arcgis/admin/uploads/upload?token={}'.format(
 start_service_url = 'http://{}:6080/arcgis/admin/services/{}.MapServer/start'.format(
     host, service_name)
 
-file_name = 'C:/Projects/GitHub/SurveySync/src/SurveySync.Soe/bin/{}/SurveySync.Soe.soe'.format(
+file_name = 'C:/Projects/GitHub/UDSH-SurveySync/src/SurveySync.Soe/bin/{}/SurveySync.Soe.soe'.format(
     configuration)
 
 user = config.get(credentials, 'username')
