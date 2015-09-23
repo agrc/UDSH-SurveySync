@@ -24,6 +24,7 @@ namespace SurveySync.Soe.Commands {
             foreach (var feature in _destination)
             {
                 var destinationPk = Convert.ToInt32(feature.Attributes["PropertyId"]);
+                var originalOid = feature.Attributes["OBJECTID"];
 
                 FeatureAction updatedFeature;
                 try
@@ -45,6 +46,8 @@ namespace SurveySync.Soe.Commands {
                 }
 
                 feature.Attributes = updatedFeature.Attributes;
+                feature.Attributes["OBJECTID"] = originalOid;
+
                 feature.Geometry = updatedFeature.Geometry;
             }
 

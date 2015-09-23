@@ -89,6 +89,7 @@
     <Compile Include="Commands\DatabaseManipulationTests.cs" />
     <Compile Include="Commands\QueryTests.cs" />
     <Compile Include="Commands\SqlWhereClauseTests.cs" />
+    <Compile Include="Commands\UpdateBuiltingAttributesTests.cs" />
     <Compile Include="Extensions\CollectionAssertionExtensions.cs" />
     <Compile Include="Models\ConfigurationTests.cs" />
     <Compile Include="Models\EditContainerTests.cs" />
